@@ -13,7 +13,7 @@ async function getProjects() {
 
   if (!result?.json) {
     logger.error('Failed to fetch projects data or invalid response structure')
-    throw new Error('Failed to fetch projects data')
+    return {}
   }
 
   return result.json

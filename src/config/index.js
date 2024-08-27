@@ -152,7 +152,7 @@ export const config = convict({
   igLogApiEndpoint: {
     doc: 'API IG Log endpoint',
     format: String,
-    default: `http://localhost:3001`,
+    default: 'http://localhost:3001',
     env: 'IG_LOG_API_ENDPOINT'
   },
   redis: /** @type {Schema<RedisConfig>} */ ({
