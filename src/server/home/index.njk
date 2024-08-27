@@ -2,57 +2,95 @@
 
 {% block content %}
   {{ appHeading({
-    text: heading,
-    caption: "Core delivery platform Node.js Frontend Template."
+    text: heading
   }) }}
 
-  {% call appPageBody() %}
-    <p>
-      Welcome to the Frontend Template, a starter kit for Core Delivery Platform Node.js Frontends 🚀
-    </p>
-    <p>
-      Based on <a href="https://github.com/DEFRA/design-standards">DEFRA</a> and <a
-              href="https://design-system.service.gov.uk/">GOV.UK</a> best practices this starter kit provides you with
-      a deployable, production ready template 🙌🏻 to start your new service with.
-    </p>
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+    <div class="govuk-grid-row" style="margin-bottom:20px;">
+      <div class="govuk-grid-column-one-half">
+        <div>
+          <h2 class="govuk-heading-m govuk">Sessions & Traces</h2>
+          <h2 class="govuk-heading-s govuk">Total sessions tracked:</h2>
+          <h2 class="govuk-heading-l govuk"><a href="/project/{{project.id}}/sessions" class="govuk-link">{{ dashboard.totalSession }}</a></h2>
+          <h2 class="govuk-heading-s govuk">Total traces tracked:</h2>
+          <h2 class="govuk-heading-l govuk">{{ dashboard.totalThreads.totalThreads }}</h2>
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-half">
+        <div>
+          <h2 class="govuk-heading-m govuk">Model cost</h2>
+          <h2 class="govuk-heading-s govuk">Total cost:</h2>
+          <h2 class="govuk-heading-l govuk">£{{ dashboard.totalCost }}</h2>
+          <table class="govuk-table">
+            <thead class="govuk-table__head">
+              <tr class="govuk-table__row">
+                <th scope="col" class="govuk-table__header">Model</th>
+                <th scope="col" class="govuk-table__header">Tokens</th>
+                <th scope="col" class="govuk-table__header">Cost</th>
+              </tr>
+            </thead>
+            <tbody class="govuk-table__body">
+            {% for item in dashboard.tokenUsage %}
+              <tr class="govuk-table__row">
+                <th scope="row" class="govuk-table__header">{{ item.model }}</th>
+                <td class="govuk-table__cell">{{ item.totalTokens }}</td>
+                <td class="govuk-table__cell">£{{  item.cost }}</td>
+              </tr>
+            {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
 
-    <ul>
-      <li>
-        <a href="https://frontend.design-system.service.gov.uk/">GOV.UK Frontend</a>
-      </li>
-      <li>
-        <a href="https://hapi.dev">Hapi</a>
-      </li>
-      <li>
-        <a href="https://mozilla.github.io/nunjucks/">Nunjucks</a>
-      </li>
-      <li>
-        <a href="https://github.com/mozilla/node-convict">Node Convict</a>
-      </li>
-      <li>
-        <a href="https://jestjs.io/">Jest testing</a>
-      </li>
-      <li>
-        <a href="https://webdriver.io">WebdriverIO</a> User Journey testing
-      </li>
-      <li>GitHub Actions Pull Request and Publish jobs</li>
-      <li>
-        <a href="https://github.com/pinojs/pino">PinoJs logging</a>
-      </li>
-      <li>
-        <a href="https://standardjs.com">Standard JS</a>
-      </li>
-      <li>
-        <a href="https://eslint.org">ESLint</a>
-      </li>
-      <li>
-        <a href="https://stylelint.io">StyleLint</a>
-      </li>
-      <li>
-        <a href="https://prettier.io">Prettier</a>
-      </li>
-      <li>and lots more... 😎</li>
-    </ul>
-  {% endcall %}
+    <div class="govuk-grid-row" style="margin-bottom:20px;">
+      <div class="govuk-grid-column-one-half">
+        <div>
+          <h2 class="govuk-heading-m govuk">Sessions by day</h2>
+          <canvas id="graph1"></canvas>
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-half">
+        <div>
+          <h2 class="govuk-heading-m govuk">Threads by day</h2>
+          <canvas id="graph2"></canvas>
+        </div>
+      </div>
+    </div>
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-one-half">
+        <div>
+          <h2 class="govuk-heading-m govuk">Model Usage - Tokens</h2>
+          <canvas id="graph3"></canvas>
+        </div>
+      </div>
+      <div class="govuk-grid-column-one-half">
+        <div>
+          <h2 class="govuk-heading-m govuk">Model Usage - Cost</h2>
+          <canvas id="graph4"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
 
+  {{ super() }}
+  <script src="{{ getAssetPath('dashboard.js') }}"></script>
+  <script>
+    const sessionsPerDay = {{ dashboard.sessionsByDay | dump | safe  }}
+    const threadsPerDay = {{ dashboard.totalThreadsByDay | dump | safe  }}
+    const modelTokenGraphData = {{ dashboard.tokenUsageByModel | dump | safe  }}
+
+    const graph1 = document.getElementById('graph1')
+    lineChartWithData(graph1, '# of sessions', sessionsPerDay)
+
+    const graph2 = document.getElementById('graph2')
+    lineChartWithData(graph2, '# of threads', threadsPerDay)
+
+    const graph3 = document.getElementById('graph3')
+    lineChartWithMultipleData(graph3, modelTokenGraphData, 'day', 'totalTokens', 'model')
+
+    const graph4 = document.getElementById('graph4')
+    lineChartWithMultipleData(graph4, modelTokenGraphData, 'day', 'cost', 'model')
+  </script>
 {% endblock %}

@@ -23,6 +23,9 @@ export default {
   entry: {
     application: {
       import: ['./javascripts/application.js', './stylesheets/application.scss']
+    },
+    dashboard: {
+      import: ['./javascripts/dashboard.js']
     }
   },
   experiments: {

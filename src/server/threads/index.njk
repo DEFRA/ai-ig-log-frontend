@@ -1,0 +1,54 @@
+{% extends 'layouts/page.njk' %}
+
+{% block content %}
+  {{ appHeading({
+    text: heading
+  }) }}
+
+  <div class="govuk-summary-card">
+    <div class="govuk-summary-card__title-wrapper">
+      <h2 class="govuk-summary-card__title">
+        {{ threads.user }} ({{ threads.start_time }} to {{ threads.end_time }})
+      </h2>
+    </div>
+    <div class="govuk-summary-card__content">
+      <dl class="govuk-summary-list">
+        <div class="govuk-summary-list__row">
+          <dt class="govuk-summary-list__key">
+            {{ appTags('# threads: ' + threads.numberOfThreads, threads.overallModelUsage) }}
+          </dt>
+        </div>
+      </dl>
+    </div>
+  </div>
+
+  {% for thread in threads.threads %}
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          <a class="govuk-link" href="/projects/{{threads.projectId}}/sessions/{{threads.sessionId}}/threads/{{thread.threadId}}">Thread ({{ thread.start_time }} to {{ thread.end_time }})</a>
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              {{ appTags('# steps: ' + thread.numberOfSteps, thread.modelUsage, thread.latencyInMilliseconds ) }}
+            </dt>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Input: <p>{{ thread.input  | dump | safe }}</p>
+            </dt>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Output: <p>{{ thread.output  | dump | safe }}</p>
+            </dt>
+          </div>
+        </dl>
+      </div>
+    </div>
+ {% endfor %}
+
+{% endblock %}

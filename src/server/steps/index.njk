@@ -1,0 +1,78 @@
+{% extends 'layouts/page.njk' %}
+
+{% block content %}
+  {{ appHeading({
+    text: heading
+  }) }}
+
+  <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Thread ({{ steps.start_time }} to {{ steps.end_time }})
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Input: <p>{{ steps.input  | dump | safe }}</p>
+            </dt>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Output: <p>{{ steps.output  | dump | safe }}</p>
+            </dt>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+  {% for thread in steps.steps %}
+    <div class="govuk-summary-card">
+      <div class="govuk-summary-card__title-wrapper">
+        <h2 class="govuk-summary-card__title">
+          Step ({{ thread.start_time }} to {{ thread.end_time }})
+        </h2>
+      </div>
+      <div class="govuk-summary-card__content">
+        <dl class="govuk-summary-list">
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              <strong class="govuk-tag" style="display: inline-block; padding: 0.25em 0.5em; white-space: nowrap;">
+                Model: {{thread.model_name}}
+              </strong>
+            </dt>
+            <dd class="govuk-summary-list__actions">
+              <strong class="govuk-tag">
+                Input tokens: {{thread.input_tokens}}
+              </strong>
+              <strong class="govuk-tag">
+                Output tokens: {{thread.output_tokens}}
+              </strong>
+            </dd>
+          </div>
+          {% if (thread.model_metadata) %}
+            <div class="govuk-summary-list__row">
+              <dt class="govuk-summary-list__key">
+                  Model metadata: 
+                  <p>{{thread.model_metadata | dump | safe }}</p>
+              </dt>
+            </div>
+          {% endif %}
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Input: <p>{{ thread.input | safe | nl2br  }}</p>
+            </dt>
+          </div>
+          <div class="govuk-summary-list__row">
+            <dt class="govuk-summary-list__key">
+              Output: <p>{{ steps.output  | dump | safe }}</p>
+            </dt>
+          </div>
+        </dl>
+      </div>
+    </div>
+
+{% endfor %}
+
+{% endblock %}
