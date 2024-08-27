@@ -1,4 +1,6 @@
 {% extends 'layouts/page.njk' %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
 
 {% block content %}
   {{ appHeading({
@@ -72,6 +74,17 @@
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+    <p></p>
+    <form method="POST" action="/data/generate/{{project.id}}">
+      {{ govukButton({
+        text: "Generate Syntethic Data",
+        id: "submit"
+      }) }}
+    </form>
   </div>
 
   {{ super() }}

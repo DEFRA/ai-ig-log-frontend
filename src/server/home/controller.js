@@ -7,8 +7,8 @@ export const homeController = {
   async handler(request, h) {
     const projectsData = await getProjects()
 
-    if (!projectsData?.projects) {
-      return h.response('projects data not found').code(404)
+    if (!projectsData?.projects || projectsData?.projects.length === 0) {
+      return h.redirect('/project')
     }
 
     const project = projectsData.projects[0]

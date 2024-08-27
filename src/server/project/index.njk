@@ -1,0 +1,33 @@
+{% extends 'layouts/page.njk' %}
+{% from "govuk/components/input/macro.njk" import govukInput %}
+{% from "govuk/components/button/macro.njk" import govukButton %}
+
+{% block content %}
+  {{ appHeading({
+    text: heading
+  }) }}
+  <div class="govuk-body">
+    <div class="govuk-grid-row">
+      <div class="govuk-grid-column-two-thirds">
+
+      <form method="POST" action="/project">
+        {{ govukInput({
+          label: {
+            text: 'What is the of your project?',
+            classes: 'govuk-label--l',
+            isPageHeading: true
+          },
+          id: 'name',
+          name: 'name',
+          value: name,
+          errorMessage: errorMessage
+        }) }}
+        {{ govukButton({
+          text: "Save and continue",
+          id: "submit"
+        }) }}
+      </form>
+    </div>
+  </div>
+
+{% endblock %}
