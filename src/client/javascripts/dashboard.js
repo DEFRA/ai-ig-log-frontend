@@ -1,6 +1,8 @@
-import Chart from 'chart.js/auto'
+// prettier-ignore
+import Chart from 'chart.js/auto' // eslint-disable-line
 
-function barChart(ctx) {
+// prettier-ignore
+function barChart(ctx) { // eslint-disable-line
   const chartInstance = new Chart(ctx, {
     type: 'bar',
     data: {
@@ -25,7 +27,8 @@ function barChart(ctx) {
   chartInstance.update()
 }
 
-function lineChart(ctx) {
+// prettier-ignore
+function lineChart(ctx) { // eslint-disable-line
   const chartInstance = new Chart(ctx, {
     type: 'line',
     data: {
@@ -50,7 +53,8 @@ function lineChart(ctx) {
   chartInstance.update()
 }
 
-function lineChartWithData(ctx, title, data) {
+// prettier-ignore
+function lineChartWithData(ctx, title, data) { // eslint-disable-line
   const labels = data.map((d) => d.label)
   const values = data.map((d) => d.value)
   const color = getRandomColor()
@@ -89,7 +93,8 @@ function getRandomColor() {
   return color
 }
 
-function lineChartWithMultipleData(ctx, data, xName, yName, labelName) {
+// prettier-ignore
+function lineChartWithMultipleData(ctx, data, xName, yName, labelName) { // eslint-disable-line
   const labels = [...new Set(data.map((d) => d[xName]))]
 
   const models = [...new Set(data.map((d) => d[labelName]))]
