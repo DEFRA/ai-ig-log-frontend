@@ -7,6 +7,7 @@ async function getThreads(sessionId) {
   logger.info('Fetching threads data from IG Log API')
 
   const threadsEndpoint = `${config.get('igLogApiEndpoint')}/sessions/${sessionId}`
+  logger.info('threadsEndpoint', threadsEndpoint)
 
   const result = await fetcher(threadsEndpoint)
 

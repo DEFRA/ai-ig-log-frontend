@@ -7,6 +7,7 @@ async function getProjects() {
   logger.info('Fetching projects data from IG Log API')
 
   const projectsEndpoint = `${config.get('igLogApiEndpoint')}/projects`
+  logger.info('projectsEndpoint', projectsEndpoint)
 
   const result = await fetcher(projectsEndpoint)
 

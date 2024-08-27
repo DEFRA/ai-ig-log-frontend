@@ -7,6 +7,7 @@ async function getSessions(projectId) {
   logger.info('Fetching sessions data from IG Log API')
 
   const projectsEndpoint = `${config.get('igLogApiEndpoint')}/projects/${projectId}/sessions`
+  logger.info('projectsEndpoint', projectsEndpoint)
 
   const result = await fetcher(projectsEndpoint)
 
