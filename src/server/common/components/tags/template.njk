@@ -1,0 +1,16 @@
+<strong class="govuk-tag">
+  {{ count }}
+</strong>
+{% for usage in usage %}
+  <strong class="govuk-tag govuk-tag--yellow" style="display: inline-block; padding: 0.25em 0.5em; white-space: nowrap;">
+    {{ usage.model_name }}: {{ usage.totalTokens }}
+  </strong>
+  <strong class="govuk-tag govuk-tag--green" style="display: inline-block; padding: 0.25em 0.5em; white-space: nowrap;">
+    {{ usage.model_name }}: £{{ usage.cost }}
+  </strong>
+{% endfor %}
+{% if(latency) %}
+  <strong class="govuk-tag">
+    latency: {{ latency }}ms
+  </strong>
+{% endif %}

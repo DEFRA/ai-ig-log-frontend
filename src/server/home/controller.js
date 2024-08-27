@@ -1,13 +1,21 @@
-/**
- * A GDS styled example home page controller.
- * Provided as an example, remove or modify as required.
- * @satisfies {Partial<ServerRoute>}
- */
+import { log } from 'console'
+import {
+  getProjects,
+  getDashboard
+} from '~/src/server/home/helpers/fetch/index.js'
+
 export const homeController = {
-  handler(request, h) {
+  async handler(request, h) {
+    const projects = await getProjects()
+    const project = projects.projects[0]
+    const dashboard = await getDashboard(project.id)
+
     return h.view('home/index', {
       pageTitle: 'Home',
-      heading: 'Home'
+      heading: project.name,
+      project,
+      projects,
+      dashboard
     })
   }
 }

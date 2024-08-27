@@ -32,7 +32,7 @@ export const config = convict({
   serviceName: {
     doc: 'Applications Service Name',
     format: String,
-    default: 'ai-ig-log-frontend'
+    default: 'IG Log - Real time logging and monitoring for LLMs'
   },
   root: {
     doc: 'Project root',
@@ -148,6 +148,12 @@ export const config = convict({
         env: 'SESSION_COOKIE_SECURE'
       }
     }
+  },
+  igLogApiEndpoint: {
+    doc: 'API IG Log endpoint',
+    format: String,
+    default: `http://localhost:3001`,
+    env: 'IG_LOG_API_ENDPOINT'
   },
   redis: /** @type {Schema<RedisConfig>} */ ({
     host: {
