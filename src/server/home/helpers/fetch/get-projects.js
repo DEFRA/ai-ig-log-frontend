@@ -9,7 +9,6 @@ async function getProjects() {
   const projectsEndpoint = `${config.get('igLogApiEndpoint')}/projects`
   logger.info(`projectsEndpoint': ${projectsEndpoint}`)
 
-
   const result = await fetcher(projectsEndpoint)
 
   if (!result?.json) {
