@@ -1,4 +1,3 @@
-import { log } from 'console'
 import Joi from 'joi'
 import { getSteps } from '~/src/server/steps/helpers/fetch/get-steps.js'
 
@@ -13,11 +12,17 @@ export const stepsController = {
     }
   },
   async handler(request, h) {
-    const steps = await getSteps(
+    const stepsData = await getSteps(
       request.params.sessionId,
       request.params.threadId
     )
-    log('steps', steps.thread)
+
+    if (!stepsData?.thread) {
+      return h.response('Thread data not found').code(404)
+    }
+
+    const steps = stepsData.thread
+
     return h.view('steps/index', {
       pageTitle: 'Session - Threads - Steps',
       heading: 'Session - Threads - Steps',
@@ -38,7 +43,7 @@ export const stepsController = {
           text: 'Steps'
         }
       ],
-      steps: steps.thread
+      steps
     })
   }
 }

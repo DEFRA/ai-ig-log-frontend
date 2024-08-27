@@ -5,15 +5,19 @@ import {
 
 export const homeController = {
   async handler(request, h) {
-    const projects = await getProjects()
-    const project = projects.projects[0]
-    const dashboard = await getDashboard(project.id)
+    const projectsData = await getProjects()
 
+    if (!projectsData?.projects) {
+      return h.response('projects data not found').code(404)
+    }
+
+    const project = projectsData.projects[0]
+    const dashboard = await getDashboard(project.id)
     return h.view('home/index', {
       pageTitle: 'Home',
       heading: project.name,
       project,
-      projects,
+      projects: projectsData.projects,
       dashboard
     })
   }

@@ -1,4 +1,4 @@
-import { proxyFetch } from '~/src/server/common/helpers/proxy-fetch.js'
+import { fetcher } from '~/src/server/common/helpers/fetch/index.js'
 import { config } from '~/src/config/index.js'
 import { createLogger } from '~/src/server/common/helpers/logging/logger.js'
 const logger = createLogger()
@@ -8,13 +8,14 @@ async function getDashboard(projectId) {
 
   const dashboardEndpoint = `${config.get('igLogApiEndpoint')}/projects/${projectId}/dashboard`
 
-  logger.info(dashboardEndpoint)
+  const result = await fetcher(dashboardEndpoint)
 
-  const response = await proxyFetch(dashboardEndpoint).catch((err) => {
-    logger.info(`err ${err.message}`)
-  })
+  if (!result?.json) {
+    logger.error('Failed to fetch dashboard data or invalid response structure')
+    throw new Error('Failed to fetch dasboard data')
+  }
 
-  return response.json()
+  return result.json
 }
 
 export { getDashboard }

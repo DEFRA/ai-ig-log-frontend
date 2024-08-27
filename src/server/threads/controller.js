@@ -13,6 +13,11 @@ export const threadsController = {
   },
   async handler(request, h) {
     const threadsData = await getThreads(request.params.sessionId)
+
+    if (!threadsData?.session) {
+      return h.response('Session data not found').code(404)
+    }
+
     const threads = transformSessionData(threadsData.session)
     return h.view('threads/index', {
       pageTitle: 'Session - Threads',
