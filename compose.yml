@@ -64,6 +64,7 @@ services:
       REDIS_HOST: redis
       LOCALSTACK_ENDPOINT: http://localstack:4566
       USE_SINGLE_INSTANCE_CACHE: true
+      IG_LOG_API_ENDPOINT: http://ai-ig-log-api:3001
     networks:
       - cdp-tenant
 
