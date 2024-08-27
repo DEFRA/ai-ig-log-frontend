@@ -7,7 +7,7 @@ async function getSteps(sessionId, threadId) {
   logger.info('Fetching steps data from IG Log API')
 
   const stepsEndpoint = `${config.get('igLogApiEndpoint')}/sessions/${sessionId}/threads/${threadId}`
-  logger.info('stepsEndpoint', stepsEndpoint)
+  logger.info(`stepsEndpoint': ${stepsEndpoint}`)
 
   const result = await fetcher(stepsEndpoint)
 

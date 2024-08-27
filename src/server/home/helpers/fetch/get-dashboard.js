@@ -7,7 +7,7 @@ async function getDashboard(projectId) {
   logger.info('Fetching dashboard data from IG Log API')
 
   const dashboardEndpoint = `${config.get('igLogApiEndpoint')}/projects/${projectId}/dashboard`
-  logger.info('projectsEndpoint', dashboardEndpoint)
+  logger.info(`projectsEndpoint': ${dashboardEndpoint}`)
 
   const result = await fetcher(dashboardEndpoint)
 
