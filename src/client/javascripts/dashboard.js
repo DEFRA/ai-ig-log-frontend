@@ -1,6 +1,6 @@
 import Chart from 'chart.js/auto'
 
-export function lineChartWithData(ctx, title, data) {
+function lineChartWithData(ctx, title, data) { // eslint-disable-line
   const labels = data.map((d) => d.label)
   const values = data.map((d) => d.value)
   const color = getRandomColor()
@@ -39,7 +39,8 @@ function getRandomColor() {
   return color
 }
 
-export function lineChartWithMultipleData(ctx, data, xName, yName, labelName) {
+
+function lineChartWithMultipleData(ctx, data, xName, yName, labelName) { // eslint-disable-line
   const labels = [...new Set(data.map((d) => d[xName]))]
 
   const models = [...new Set(data.map((d) => d[labelName]))]
