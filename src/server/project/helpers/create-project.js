@@ -3,7 +3,7 @@ import { config } from '~/src/config/index.js'
 import { createLogger } from '~/src/server/common/helpers/logging/logger.js'
 const logger = createLogger()
 
-async function createProject(project) {
+const createProject = async (project) => {
   logger.info('Create project data for IG Log API')
 
   const projectEndpoint = `${config.get('igLogApiEndpoint')}/projects`

@@ -3,11 +3,6 @@ import {
   projectControllerPost
 } from '~/src/server/project/controller.js'
 
-/**
- * Sets up the routes used in the /about page.
- * These routes are registered in src/server/router.js.
- * @satisfies {ServerRegisterPluginObject<void>}
- */
 export const project = {
   plugin: {
     name: 'project',
@@ -27,7 +22,3 @@ export const project = {
     }
   }
 }
-
-/**
- * @import { ServerRegisterPluginObject } from '@hapi/hapi'
- */

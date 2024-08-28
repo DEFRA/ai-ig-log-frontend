@@ -29,7 +29,3 @@ export const sessionsController = {
     })
   }
 }
-
-/**
- * @import { ServerRoute } from '@hapi/hapi'
- */
