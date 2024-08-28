@@ -86,7 +86,9 @@
       }) }}
     </form>
   </div>
+{% endblock %}
 
+{% block bodyEnd %}
   {{ super() }}
   <script src="{{ getAssetPath('dashboard.js') }}"></script>
   <script>
