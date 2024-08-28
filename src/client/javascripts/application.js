@@ -14,3 +14,5 @@ createAll(ErrorSummary)
 createAll(Header)
 createAll(Radios)
 createAll(SkipLink)
+
+console.log('Hello, world!')

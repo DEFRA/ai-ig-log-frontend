@@ -39,7 +39,6 @@ function getRandomColor() {
   return color
 }
 
-
 function lineChartWithMultipleData(ctx, data, xName, yName, labelName) { // eslint-disable-line
   const labels = [...new Set(data.map((d) => d[xName]))]
 
