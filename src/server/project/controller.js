@@ -40,7 +40,3 @@ const projectControllerPost = {
 }
 
 export { projectControllerGet, projectControllerPost }
-
-/**
- * @import { ServerRoute } from '@hapi/hapi'
- */

@@ -6,19 +6,19 @@ const models = {
   'gpt-3.5-turbo': 0.0005
 }
 
-function getRandomModel() {
+const getRandomModel = () => {
   const keys = Object.keys(models)
   const randomKey = keys[Math.floor(Math.random() * keys.length)]
   return randomKey
 }
 
-function generateRandomDate(start, end) {
+const generateRandomDate = (start, end) => {
   return new Date(
     start.getTime() + Math.random() * (end.getTime() - start.getTime())
   )
 }
 
-function generateSyntheticData(projectId, numSessions, startDate, endDate) {
+const generateSyntheticData = (projectId, numSessions, startDate, endDate) => {
   const data = {
     sessions: []
   }

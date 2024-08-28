@@ -47,7 +47,3 @@ export const stepsController = {
     })
   }
 }
-
-/**
- * @import { ServerRoute } from '@hapi/hapi'
- */

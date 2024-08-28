@@ -22,7 +22,3 @@ export const homeController = {
     })
   }
 }
-
-/**
- * @import { ServerRoute } from '@hapi/hapi'
- */
