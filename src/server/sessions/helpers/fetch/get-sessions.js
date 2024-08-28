@@ -3,7 +3,7 @@ import { config } from '~/src/config/index.js'
 import { createLogger } from '~/src/server/common/helpers/logging/logger.js'
 const logger = createLogger()
 
-async function getSessions(projectId) {
+const getSessions = async (projectId) => {
   logger.info('Fetching sessions data from IG Log API')
 
   const projectsEndpoint = `${config.get('igLogApiEndpoint')}/projects/${projectId}/sessions`

@@ -14,7 +14,3 @@ export const dataController = {
     return h.redirect('/')
   }
 }
-
-/**
- * @import { ServerRoute } from '@hapi/hapi'
- */

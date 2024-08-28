@@ -39,7 +39,3 @@ export const threadsController = {
     })
   }
 }
-
-/**
- * @import { ServerRoute } from '@hapi/hapi'
- */

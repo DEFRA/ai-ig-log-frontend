@@ -3,7 +3,7 @@ import { config } from '~/src/config/index.js'
 import { createLogger } from '~/src/server/common/helpers/logging/logger.js'
 const logger = createLogger()
 
-async function getSteps(sessionId, threadId) {
+const getSteps = async (sessionId, threadId) => {
   logger.info('Fetching steps data from IG Log API')
 
   const stepsEndpoint = `${config.get('igLogApiEndpoint')}/sessions/${sessionId}/threads/${threadId}`
