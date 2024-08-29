@@ -28,7 +28,9 @@
             <thead class="govuk-table__head">
               <tr class="govuk-table__row">
                 <th scope="col" class="govuk-table__header">Model</th>
-                <th scope="col" class="govuk-table__header">Tokens</th>
+                <th scope="col" class="govuk-table__header">Input</th>
+                <th scope="col" class="govuk-table__header">Output</th>
+                <th scope="col" class="govuk-table__header">Total</th>
                 <th scope="col" class="govuk-table__header">Cost</th>
               </tr>
             </thead>
@@ -36,6 +38,8 @@
             {% for item in dashboard.tokenUsage %}
               <tr class="govuk-table__row">
                 <th scope="row" class="govuk-table__header">{{ item.model }}</th>
+                <td class="govuk-table__cell">{{ item.totalInputTokens }}</td>
+                <td class="govuk-table__cell">{{ item.totalOutputTokens }}</td>
                 <td class="govuk-table__cell">{{ item.totalTokens }}</td>
                 <td class="govuk-table__cell">£{{  item.cost }}</td>
               </tr>
