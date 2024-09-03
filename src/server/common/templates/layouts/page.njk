@@ -28,6 +28,12 @@
 {% endblock %}
 
 {% block beforeContent %}
+  {% if auth.isAuthenticated %}
+    <div style="position:relative; float:right;" >
+      <a href="/logout" class="govuk-body govuk-link">Sign out {{user.username}}</a>    
+    </div>
+    <div style="clear:both;"></div>
+  {% endif %}
   {% if breadcrumbs.length > 1 %}
     {{ appBreadcrumbs({
       items: breadcrumbs

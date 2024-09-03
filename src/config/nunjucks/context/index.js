@@ -5,6 +5,8 @@ import { config } from '~/src/config/index.js'
 import { createLogger } from '~/src/server/common/helpers/logging/logger.js'
 import { buildNavigation } from '~/src/config/nunjucks/context/build-navigation.js'
 
+import auth from '~/src/server/auth/helpers/index.js'
+
 const logger = createLogger()
 const assetPath = config.get('assetPath')
 const manifestPath = path.join(
@@ -33,6 +35,8 @@ export function context(request) {
     serviceUrl: '/',
     breadcrumbs: [],
     navigation: buildNavigation(request),
+    auth: auth.mapAuth(request),
+    user: auth.getUser(request),
 
     /**
      * @param {string} asset

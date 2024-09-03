@@ -1,9 +1,13 @@
+import permissions from '~/src/server/auth/helpers/permissions.js'
 import {
   getProjects,
   getDashboard
 } from '~/src/server/home/helpers/fetch/index.js'
 
 export const homeController = {
+  options: {
+    auth: { scope: [permissions.admin] }
+  },
   async handler(request, h) {
     const projectsData = await getProjects()
 

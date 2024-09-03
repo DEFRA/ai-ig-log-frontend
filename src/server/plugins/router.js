@@ -8,6 +8,7 @@ import { threads } from '~/src/server/threads/index.js'
 import { steps } from '~/src/server/steps/index.js'
 import { project } from '~/src/server/project/index.js'
 import { data } from '~/src/server/data/index.js'
+import { auth } from '~/src/server/auth/index.js'
 
 /**
  * @satisfies {ServerRegisterPluginObject<void>}
@@ -22,7 +23,15 @@ export const router = {
       await server.register([health])
 
       // Application specific routes, add your own routes here
-      await server.register([home, sessions, threads, steps, project, data])
+      await server.register([
+        auth,
+        home,
+        sessions,
+        threads,
+        steps,
+        project,
+        data
+      ])
 
       // Static assets
       await server.register([serveStaticFiles])

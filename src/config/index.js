@@ -32,7 +32,7 @@ export const config = convict({
   serviceName: {
     doc: 'Applications Service Name',
     format: String,
-    default: 'IG Log - Real time logging and monitoring for LLMs'
+    default: 'IG Log - Observability Platform for LLMs'
   },
   root: {
     doc: 'Project root',
@@ -147,6 +147,56 @@ export const config = convict({
         default: isProduction,
         env: 'SESSION_COOKIE_SECURE'
       }
+    }
+  },
+  auth: {
+    enabled: {
+      doc: 'Is authentication enabled',
+      format: Boolean,
+      default: false,
+      env: 'AUTH_ENABLED'
+    },
+    azure: {
+      clientId: {
+        doc: 'Azure AD client Id',
+        format: String,
+        default: '',
+        env: 'AZURE_AD_CLIENT_ID'
+      },
+      clientSecret: {
+        doc: 'Azure AD client secret',
+        format: String,
+        default: '',
+        env: 'AZURE_AD_CLIENT_SECRET',
+        sensitive: true
+      },
+      authority: {
+        doc: 'Azure AD authority',
+        format: String,
+        default: '',
+        env: 'AZURE_AD_AUTHORITY'
+      }
+    },
+    cookie: {
+      ttl: {
+        doc: 'Auth cookie ttl',
+        format: Number,
+        default: fourHours,
+        env: 'COOKIE_TTL'
+      },
+      password: {
+        doc: 'Auth cookie password',
+        format: String,
+        default: 'the-password-must-be-at-least-32-characters-long',
+        env: 'COOKIE_PASSWORD',
+        sensitive: true
+      }
+    },
+    redirectUri: {
+      doc: 'Azure AD redirect URI',
+      format: String,
+      default: 'http://localhost:3000/authenticate',
+      env: 'AZURE_AD_REDIRECT_URI'
     }
   },
   igLogApiEndpoint: {
