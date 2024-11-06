@@ -8,7 +8,7 @@
   <div class="govuk-summary-card">
       <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
-          Thread ({{ steps.start_time }} to {{ steps.end_time }})
+          Thread ({{ steps.startTime }} to {{ steps.endTime }})
         </h2>
       </div>
       <div class="govuk-summary-card__content">
@@ -31,7 +31,7 @@
     <div class="govuk-summary-card">
       <div class="govuk-summary-card__title-wrapper">
         <h2 class="govuk-summary-card__title">
-          Step ({{ thread.start_time }} to {{ thread.end_time }})
+          Step ({{ thread.startTime }} to {{ thread.endTime }})
         </h2>
       </div>
       <div class="govuk-summary-card__content">
@@ -39,23 +39,23 @@
           <div class="govuk-summary-list__row">
             <dt class="govuk-summary-list__key">
               <strong class="govuk-tag" style="display: inline-block; padding: 0.25em 0.5em; white-space: nowrap;">
-                Model: {{thread.model_name}}
+                Model: {{thread.modelName}}
               </strong>
             </dt>
             <dd class="govuk-summary-list__actions">
               <strong class="govuk-tag">
-                Input tokens: {{thread.input_tokens}}
+                Input tokens: {{thread.inputTokens}}
               </strong>
               <strong class="govuk-tag">
-                Output tokens: {{thread.output_tokens}}
+                Output tokens: {{thread.outputTokens}}
               </strong>
             </dd>
           </div>
-          {% if (thread.model_metadata) %}
+          {% if (thread.modelMetadata) %}
             <div class="govuk-summary-list__row">
               <dt class="govuk-summary-list__key">
                   Model metadata: 
-                  <p>{{thread.model_metadata | dump | safe }}</p>
+                  <p>{{thread.modelMetadata | dump | safe }}</p>
               </dt>
             </div>
           {% endif %}
