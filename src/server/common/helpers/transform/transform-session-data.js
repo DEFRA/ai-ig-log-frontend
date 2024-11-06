@@ -12,7 +12,7 @@ function formatDate(dateString) {
 function calculateTotalLatency(threads) {
   return threads.reduce((totalLatency, thread) => {
     const latencyInMilliseconds =
-      new Date(thread.end_time) - new Date(thread.start_time)
+      new Date(thread.endTime) - new Date(thread.startTime)
     return totalLatency + latencyInMilliseconds
   }, 0)
 }
@@ -23,8 +23,8 @@ function calculateOverallModelUsage(threads) {
   threads.forEach((thread) => {
     const modelUsage = {}
     thread.steps.forEach((step) => {
-      const modelName = step.model_name
-      const totalTokens = step.input_tokens + step.output_tokens
+      const modelName = step.modelName
+      const totalTokens = step.inputTokens + step.outputTokens
 
       if (!overallModelUsage[modelName]) {
         overallModelUsage[modelName] = {
@@ -66,12 +66,12 @@ function transformSessionData(sessionData) {
   const threads = sessionData.threads.map((thread) => {
     const numberOfSteps = thread.steps.length
     const latencyInMilliseconds =
-      new Date(thread.end_time) - new Date(thread.start_time)
+      new Date(thread.endTime) - new Date(thread.startTime)
     return {
       threadId: thread.id,
-      sort_time: new Date(thread.start_time),
-      start_time: formatDate(thread.start_time),
-      end_time: formatDate(thread.end_time),
+      sort_time: new Date(thread.startTime),
+      start_time: formatDate(thread.startTime),
+      end_time: formatDate(thread.endTime),
       input: thread.input,
       output: thread.output,
       numberOfSteps,
@@ -87,11 +87,11 @@ function transformSessionData(sessionData) {
 
   return {
     sessionId: sessionData.sessionId,
-    projectId: sessionData.project_id,
+    projectId: sessionData.projectId,
     user: sessionData.user,
-    sort_time: new Date(sessionData.start_time),
-    start_time: formatDate(sessionData.start_time),
-    end_time: formatDate(sessionData.end_time),
+    sort_time: new Date(sessionData.startTime),
+    start_time: formatDate(sessionData.startTime),
+    end_time: formatDate(sessionData.endTime),
     numberOfThreads,
     threads,
     overallModelUsage: overallModelUsageArray,

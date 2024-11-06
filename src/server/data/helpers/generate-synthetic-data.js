@@ -29,10 +29,10 @@ const generateSyntheticData = (projectId, numSessions, startDate, endDate) => {
     const sessionEnd = generateRandomDate(sessionStart, endDate)
 
     const session = {
-      end_time: sessionEnd.toISOString(),
+      endTime: sessionEnd.toISOString(),
       id: sessionId,
-      project_id: projectId,
-      start_time: sessionStart.toISOString(),
+      projectId,
+      startTime: sessionStart.toISOString(),
       threads: [],
       user: `user${i}@test.com`
     }
@@ -47,12 +47,12 @@ const generateSyntheticData = (projectId, numSessions, startDate, endDate) => {
       const thread = {
         id: threadId,
         name: sessionId,
-        start_time: threadStart.toISOString(),
+        startTime: threadStart.toISOString(),
         input: 'What is SFI?',
         output:
           'SFI stands for Sustainable Farming Incentive. It is a scheme aimed at getting large numbers of farmers to make sustainable changes to the way they farm, with the cumulative effect of this producing large-scale environmental benefits.',
         steps: [],
-        end_time: threadEnd.toISOString()
+        endTime: threadEnd.toISOString()
       }
 
       const numSteps = Math.floor(Math.random() * 10) + 1
@@ -68,8 +68,8 @@ const generateSyntheticData = (projectId, numSessions, startDate, endDate) => {
           id: stepId,
           name: stepId,
           type: 'llm-start',
-          model_name: modelName,
-          model_metadata: {
+          modelName,
+          modelMetadata: {
             model: modelName,
             temperature: 1,
             top_p: 1,
@@ -80,10 +80,10 @@ const generateSyntheticData = (projectId, numSessions, startDate, endDate) => {
           },
           input:
             'System: You are an assistant who helps with questions and supplies the answer.',
-          start_time: stepStart.toISOString(),
-          end_time: stepEnd.toISOString(),
-          input_tokens: Math.floor(Math.random() * 1000), // Random token count
-          output_tokens: Math.floor(Math.random() * 50) // Random token count
+          startTime: stepStart.toISOString(),
+          endTime: stepEnd.toISOString(),
+          inputTokens: Math.floor(Math.random() * 1000), // Random token count
+          outputTokens: Math.floor(Math.random() * 50) // Random token count
         }
 
         thread.steps.push(step)
